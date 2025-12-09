@@ -93,7 +93,7 @@ const HeroSection = () => {
                 >
                   Hi, I'm{" "}
                   <span className="bg-gradient-to-r from-primary via-purple-400 to-pink-400 bg-clip-text text-transparent animate-text-glow">
-                    Akib
+                    akib
                   </span>
                 </h1>
                 <p
