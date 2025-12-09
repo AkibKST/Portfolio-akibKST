@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
-import { Home, Info, Mail, Briefcase } from "lucide-react";
+import { Home, Info, Mail, Briefcase, Wrench, Layers } from "lucide-react";
 import { useTheme } from "@/provider/theme.provider";
 
 interface NavItem {
@@ -47,6 +47,18 @@ const HeroStickyNav = () => {
       href: "/contact",
       label: "Contact",
       color: "from-orange-500 to-red-500",
+    },
+    {
+      icon: <Wrench className="w-5 h-5" />,
+      href: "/services",
+      label: "Service",
+      color: "from-yellow-500 to-amber-500",
+    },
+    {
+      icon: <Layers className="w-5 h-5" />,
+      href: "/projects",
+      label: "Project",
+      color: "from-indigo-500 to-violet-500",
     },
     {
       icon: <Briefcase className="w-5 h-5" />,

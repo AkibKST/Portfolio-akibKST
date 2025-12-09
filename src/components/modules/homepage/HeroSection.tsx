@@ -67,7 +67,7 @@ const HeroSection = () => {
         }}
         className="relative backdrop-blur-xl bg-black/30 w-full opacity-97 flex flex-col overflow-y-auto"
       >
-        <section className="relative overflow-hidden flex-1 mx-auto container w-full flex flex-col justify-center py-4 sm:py-8 px-4 sm:px-6">
+        <section className="relative overflow-hidden flex-1 mx-auto container w-full flex flex-col justify-center py-4 sm:py-8 px-4 sm:px-8 md:px-6">
           {/* Logo at top */}
           <div
             className="flex justify-center mb-6 sm:mb-8 md:mb-12 pt-2 sm:pt-6 md:pt-8 animate-slide-up"
