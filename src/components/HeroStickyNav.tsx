@@ -74,7 +74,7 @@ const HeroStickyNav = () => {
           <>
             {/* Background glow effect */}
             <div
-              className={`absolute inset-0 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-all duration-300 bg-gradient-to-r ${item.color}`}
+              className={`absolute inset-0 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-all duration-500 bg-gradient-to-r ${item.color}`}
               style={{
                 width: "64px",
                 height: "64px",
@@ -85,7 +85,7 @@ const HeroStickyNav = () => {
 
             {/* Icon container */}
             <div
-              className={`relative w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 transform ${
+              className={`relative w-8 h-8 rounded-full flex items-center justify-center transition-all duration-500 transform ${
                 activeIndex === index ? "scale-125" : "scale-100"
               } ${
                 theme === "dark"
@@ -102,7 +102,7 @@ const HeroStickyNav = () => {
 
             {/* Tooltip label */}
             <div
-              className={`absolute right-16 top-1/2 transform -translate-y-1/2 px-3 py-1 rounded-lg text-sm font-medium whitespace-nowrap transition-all duration-300 pointer-events-none ${
+              className={`absolute right-16 top-1/2 transform -translate-y-1/2 px-3 py-1 rounded-lg text-sm font-medium whitespace-nowrap transition-all duration-500 pointer-events-none ${
                 activeIndex === index
                   ? "opacity-100 translate-x-0"
                   : "opacity-0 translate-x-4"
@@ -122,7 +122,7 @@ const HeroStickyNav = () => {
             <button
               key={index}
               onClick={item.onClick}
-              className="relative group outline-none cursor-pointer"
+              className="relative group outline-none cursor-pointer transition-transform duration-300 hover:scale-110"
               onMouseEnter={() => setActiveIndex(index)}
               onMouseLeave={() => setActiveIndex(-1)}
             >
@@ -141,7 +141,7 @@ const HeroStickyNav = () => {
           <Link
             key={index}
             to={item.href!}
-            className="relative group"
+            className="relative group transition-transform duration-300 hover:scale-110"
             onMouseEnter={() => setActiveIndex(index)}
             onMouseLeave={() => setActiveIndex(-1)}
             onClick={handleLinkClick}
@@ -153,7 +153,7 @@ const HeroStickyNav = () => {
 
       {/* Decorative line */}
       <div
-        className={`w-0.5 h-32 mx-auto my-2 rounded-full transition-all duration-500 ${
+        className={`w-0.5 h-32 mx-auto my-2 rounded-full transition-all duration-700 ${
           theme === "dark"
             ? "bg-gradient-to-b from-transparent via-white/40 to-transparent"
             : "bg-gradient-to-b from-transparent via-black/40 to-transparent"

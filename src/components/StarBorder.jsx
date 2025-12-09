@@ -9,6 +9,38 @@ const StarBorder = ({
   children,
   ...rest
 }) => {
+  // If rendering as a button, we need to wrap the decorative elements outside
+  if (Component === "button" || Component === "a") {
+    return (
+      <>
+        <div
+          className="border-gradient-bottom"
+          style={{
+            background: `radial-gradient(circle, ${color}, transparent 10%)`,
+            animationDuration: speed,
+          }}
+        ></div>
+        <div
+          className="border-gradient-top"
+          style={{
+            background: `radial-gradient(circle, ${color}, transparent 10%)`,
+            animationDuration: speed,
+          }}
+        ></div>
+        <Component
+          className={`star-border-container ${className}`}
+          style={{
+            padding: `${thickness}px 0`,
+            ...rest.style,
+          }}
+          {...rest}
+        >
+          <div className="inner-content">{children}</div>
+        </Component>
+      </>
+    );
+  }
+
   return (
     <Component
       className={`star-border-container ${className}`}
