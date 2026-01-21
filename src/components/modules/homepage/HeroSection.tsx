@@ -1,23 +1,14 @@
 import { Download, Mail } from "lucide-react";
+import { Suspense } from "react";
 import Logo from "@/assets/icons/Logo";
 import { useNavigate } from "react-router";
-import LiquidEther from "@/components/LiquidEther";
 import StarBorder from "@/components/StarBorder";
-import AnimatedTechLogos from "@/components/AnimatedTechLogos";
+import { HeroScene } from "@/components/3D/HeroScene";
+import { Canvas3D } from "@/components/3D/Canvas3D";
 import "@/styles/animations.css";
 
 const HeroSection = () => {
   const navigate = useNavigate();
-
-  // Tech logos for animation - customize with your technologies
-  const techLogos = [
-    { name: "React", icon: "⚛️", color: "bg-blue-500/30" },
-    { name: "TypeScript", icon: "TS", color: "bg-blue-600/30" },
-    { name: "Node.js", icon: "⬢", color: "bg-green-500/30" },
-    { name: "Tailwind", icon: "🎨", color: "bg-cyan-500/30" },
-    { name: "MongoDB", icon: "🍃", color: "bg-green-600/30" },
-    { name: "Next.js", icon: "▲", color: "bg-black/30" },
-  ];
 
   const handleDownloadCV = () => {
     // Create a link to download CV - update with your actual CV path
@@ -30,163 +21,84 @@ const HeroSection = () => {
   };
 
   return (
-    <>
-      {/* Background */}
-      <div
-        style={{
-          position: "fixed",
-          width: "100vw",
-          height: "100vh",
-          zIndex: -1,
-        }}
-      >
-        <LiquidEther
-          colors={["#5227FF", "#FF9FFC", "#B19EEF"]}
-          mouseForce={20}
-          cursorSize={100}
-          isViscous={false}
-          viscous={30}
-          iterationsViscous={32}
-          iterationsPoisson={32}
-          resolution={0.5}
-          isBounce={false}
-          autoDemo={true}
-          autoSpeed={0.5}
-          autoIntensity={2.2}
-          takeoverDuration={0.25}
-          autoResumeDelay={3000}
-          autoRampDuration={0.6}
-        />
-      </div>
+    <div className="relative min-h-[calc(100vh-64px)] w-full overflow-hidden flex flex-col justify-center">
+      {/* Light Mode Glow Blobs - Only visible in light mode */}
+      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/20 blur-[120px] dark:hidden opacity-60 pointer-events-none animate-float-flow" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-purple-500/10 blur-[100px] dark:hidden opacity-60 pointer-events-none animate-float-flow" style={{ animationDelay: "2s" }} />
 
-      <div
-        style={{
-          position: "relative",
-          zIndex: 1,
-          height: "calc(100vh - 64px)",
-        }}
-        className="relative backdrop-blur-xl bg-black/30 w-full opacity-97 flex flex-col overflow-y-auto"
-      >
-        <section className="relative overflow-hidden flex-1 mx-auto container w-full flex flex-col justify-center py-4 sm:py-8 px-4 sm:px-8 md:px-6">
-          {/* Logo at top */}
-          <div
-            className="flex justify-center mb-6 sm:mb-8 md:mb-12 pt-2 sm:pt-6 md:pt-8 animate-slide-up"
-            style={{ animationDelay: "0.1s" }}
-          >
-            <div className="bg-background/30 rounded-lg sm:rounded-xl p-2 sm:p-4 shadow-sm backdrop-blur-sm hover:bg-background/40 hover:shadow-md hover:scale-105 transition-all duration-500 scale-75 sm:scale-100 origin-top">
-              <Logo />
+      <section className="relative container mx-auto px-6 sm:px-8 py-12 md:py-20 lg:py-0 flex-1 flex flex-col justify-center z-10">
+
+        {/* Logo Animation */}
+        <div className="flex justify-center mb-8 animate-fade-up">
+          <div className="p-4 rounded-2xl bg-background/50 backdrop-blur-md shadow-lg border border-border/50 hover:scale-110 hover:shadow-primary/20 transition-all duration-500">
+            <Logo />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          {/* Left Content */}
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-6 animate-slide-left" style={{ animationDelay: "0.2s" }}>
+
+            <div className="space-y-4">
+              {/* Badge */}
+              <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 text-primary text-sm font-medium backdrop-blur-sm animate-scale-in">
+                ✨ Available for freelance
+              </div>
+
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1]">
+                Hi, I'm{" "}
+                <span className="bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent animate-text-glow inline-block">
+                  akib
+                </span>
+              </h1>
+              <p className="text-lg sm:text-xl md:text-2xl font-medium text-foreground/80">
+                Full Stack Developer & UI/UX Designer
+              </p>
+            </div>
+
+            <p className="max-w-xl text-base sm:text-lg text-muted-foreground leading-relaxed">
+              I craft visually stunning and high-performance web experiences.
+              Specializing in modern tech stacks to build digital solutions that matter.
+            </p>
+
+            {/* Buttons */}
+            <div className="flex flex-wrap justify-center lg:justify-start gap-4 pt-4 w-full">
+              <StarBorder as="div" className="w-full sm:w-auto min-w-[160px]" color="cyan" speed="4s">
+                <button
+                  onClick={() => navigate("/contact")}
+                  className="w-full h-12 px-8 inline-flex items-center justify-center gap-2 rounded-lg bg-primary text-primary-foreground font-semibold shadow-lg shadow-primary/25 hover:bg-primary/90 hover:scale-105 hover:shadow-primary/40 transition-all duration-300"
+                >
+                  <Mail className="w-5 h-5" />
+                  Hire Me
+                </button>
+              </StarBorder>
+
+              <StarBorder as="div" className="w-full sm:w-auto min-w-[160px]" color="purple" speed="4s">
+                <button
+                  onClick={handleDownloadCV}
+                  className="w-full h-12 px-8 inline-flex items-center justify-center gap-2 rounded-lg bg-background/50 border border-primary/20 text-foreground font-semibold backdrop-blur-md hover:bg-primary/5 hover:border-primary/50 hover:scale-105 transition-all duration-300"
+                >
+                  <Download className="w-5 h-5" />
+                  Download CV
+                </button>
+              </StarBorder>
             </div>
           </div>
 
-          {/* Main content - Two flex sections */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-16 items-center flex-1">
-            {/* Left section - Text content */}
-            <div
-              className="flex flex-col justify-center space-y-2 sm:space-y-3 md:space-y-4 lg:space-y-6 animate-slide-left"
-              style={{ animationDelay: "0.2s" }}
-            >
-              {/* Name and Designation */}
-              <div className="space-y-1 sm:space-y-2">
-                <h1
-                  className="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-tight animate-slide-up"
-                  style={{ animationDelay: "0.25s" }}
-                >
-                  Hi, I'm{" "}
-                  <span className="bg-gradient-to-r from-primary via-purple-400 to-pink-400 bg-clip-text text-transparent animate-text-glow">
-                    akib
-                  </span>
-                </h1>
-                <p
-                  className="text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-muted-foreground leading-snug animate-slide-up"
-                  style={{ animationDelay: "0.3s" }}
-                >
-                  Full Stack Developer & Designer
-                </p>
-              </div>
+          {/* Right Content - 3D Scene */}
+          <div className="relative hidden lg:block h-[500px] w-full animate-slide-right delay-100">
+            {/* 3D Scene Background Glow */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-purple-500/20 rounded-full blur-[100px] opacity-40 animate-pulse" />
 
-              {/* Description */}
-              <div className="space-y-1 sm:space-y-2 text-[11px] xs:text-xs sm:text-sm md:text-base lg:text-lg text-muted-foreground max-w-xl">
-                <p
-                  className="animate-slide-up"
-                  style={{ animationDelay: "0.35s" }}
-                >
-                  I craft beautiful, functional web experiences that solve real
-                  problems. Specializing in React, TypeScript, and modern web
-                  technologies.
-                </p>
-                <p
-                  className="hidden sm:block animate-slide-up"
-                  style={{ animationDelay: "0.4s" }}
-                >
-                  Let's build something extraordinary together. I'm passionate
-                  about creating digital solutions that make an impact.
-                </p>
-              </div>
-
-              {/* Buttons */}
-              <div className="flex flex-col xs:flex-row gap-2 sm:gap-3 md:gap-4 pt-2 sm:pt-4 mb-8 sm:mb-10 md:mb-12 flex-wrap">
-                <StarBorder
-                  as="div"
-                  className="custom-class animate-slide-up w-full xs:flex-1"
-                  color="cyan"
-                  speed="5s"
-                  style={{ animationDelay: "0.45s" }}
-                >
-                  <button
-                    onClick={() => navigate("/contact")}
-                    className="w-full inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-xs sm:text-sm md:text-base font-medium transition-all duration-300 bg-primary text-primary-foreground shadow-xs hover:bg-primary/90 h-10 sm:h-11 md:h-12 px-4 sm:px-5 md:px-6 py-2 hover:shadow-lg hover:shadow-primary/50 hover:scale-105"
-                  >
-                    <Mail className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 transition-transform duration-300 group-hover:scale-110" />
-                    Hire Me
-                  </button>
-                </StarBorder>
-
-                <StarBorder
-                  as="div"
-                  className="custom-class animate-slide-up w-full xs:flex-1"
-                  color="purple"
-                  speed="5s"
-                  style={{ animationDelay: "0.5s" }}
-                >
-                  <button
-                    onClick={handleDownloadCV}
-                    className="w-full inline-flex items-center justify-center gap-1 xs:gap-2 whitespace-nowrap rounded-md text-xs sm:text-sm md:text-base font-medium transition-all duration-300 border border-primary/50 bg-transparent text-primary hover:bg-primary/10 hover:border-primary shadow-xs h-10 sm:h-11 md:h-12 px-4 sm:px-5 md:px-6 py-2 hover:shadow-lg hover:shadow-primary/30 hover:scale-105"
-                  >
-                    <Download className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 transition-transform duration-300 group-hover:scale-110" />
-                    <span className="hidden xs:inline">Download CV</span>
-                    <span className="xs:hidden">CV</span>
-                  </button>
-                </StarBorder>
-              </div>
-            </div>
-
-            {/* Right section - Photo with animated tech logos */}
-            <div
-              className="hidden sm:flex justify-center items-center mt-4 sm:mt-0 animate-slide-right"
-              style={{ animationDelay: "0.3s" }}
-            >
-              <div className="relative">
-                {/* Profile image with frame */}
-                <div className="relative w-48 sm:w-64 md:w-80 lg:w-96 h-48 sm:h-64 md:h-80 lg:h-96 rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-primary/30 shadow-2xl transition-all duration-500 hover:shadow-2xl hover:shadow-primary/40 hover:scale-105 hover:border-primary/60">
-                  <img
-                    src="/src/assets/image/19199517.jpg"
-                    alt="Profile"
-                    className="w-full h-full object-cover transition-all duration-500 hover:scale-110"
-                  />
-                  {/* Overlay gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent transition-all duration-500" />
-                </div>
-
-                {/* Animated tech logos around the image */}
-                <div className="absolute -inset-12 sm:-inset-16 md:-inset-20 lg:-inset-24 transition-all duration-500">
-                  <AnimatedTechLogos logos={techLogos} />
-                </div>
-              </div>
-            </div>
+            <Canvas3D height="h-full">
+              <Suspense fallback={null}>
+                <HeroScene />
+              </Suspense>
+            </Canvas3D>
           </div>
-        </section>
-      </div>
-    </>
+        </div>
+      </section>
+    </div>
   );
 };
 

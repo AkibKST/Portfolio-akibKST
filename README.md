@@ -24,7 +24,7 @@ I believe great software starts with a clear problem statement and ends with mea
 - Shad-Cn (For reuseable Component)
 - HTML & CSS (responsive, accessible)
 - Node.js & Express
-- REST APIs & GraphQL
+- REST APIs 
 - MongoDB & PostgreSQL
 - Mongoose & Prisma ODM
 - Testing: Jest, React Testing Library(On-progress)
@@ -54,6 +54,7 @@ I believe great software starts with a clear problem statement and ends with mea
 - Integrate backend services, databases and authentication
 - Improve performance, SEO and accessibility
 - Offer code reviews, mentoring and technical consultation
+- 3D Animation
 
 ---
 

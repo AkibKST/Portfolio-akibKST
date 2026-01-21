@@ -18,7 +18,7 @@ export default function Logo() {
             fill="#FF630B"
           ></path>
         </svg>
-        <div className="text-white font-bold text-lg">
+        <div className="text-foreground font-bold text-lg">
           akib<span className="text-primary"> KST</span>
         </div>
       </div>

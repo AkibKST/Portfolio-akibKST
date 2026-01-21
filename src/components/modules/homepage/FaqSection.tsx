@@ -1,9 +1,12 @@
+import { Suspense } from "react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { FAQScene } from "@/components/3D/FAQScene";
+import { Canvas3D } from "@/components/3D/Canvas3D";
 
 interface FaqItem {
   id: string;
@@ -66,21 +69,41 @@ const FaqSection = ({
   return (
     <section className="py-24">
       <div className="container mx-auto px-8">
-        <h1 className="mb-3 mt-2 text-balance text-3xl font-semibold md:text-4xl">
-          FAQ <span className="text-primary"> Section</span>
-        </h1>
-        <Accordion type="single" collapsible>
-          {items.map((item, index) => (
-            <AccordionItem key={index} value={`item-${index}`}>
-              <AccordionTrigger className="font-semibold hover:no-underline">
-                {item.question}
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground">
-                {item.answer}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+          {/* Left side - Heading and Accordion */}
+          <div className="flex flex-col">
+            <h1 className="mb-3 mt-2 text-balance text-3xl font-semibold md:text-4xl">
+              FAQ <span className="text-primary"> Section</span>
+            </h1>
+            <Accordion type="single" collapsible>
+              {items.map((item, index) => (
+                <AccordionItem key={index} value={`item-${index}`}>
+                  <AccordionTrigger className="font-semibold hover:no-underline">
+                    {item.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground">
+                    {item.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+
+          {/* Right side - 3D Animation */}
+          <div className="hidden lg:flex justify-center items-center">
+            <Canvas3D height="h-96">
+              <Suspense
+                fallback={
+                  <div className="w-full h-full flex items-center justify-center bg-black/20 backdrop-blur-sm">
+                    <div className="animate-spin">Loading...</div>
+                  </div>
+                }
+              >
+                <FAQScene />
+              </Suspense>
+            </Canvas3D>
+          </div>
+        </div>
       </div>
     </section>
   );
