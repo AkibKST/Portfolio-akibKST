@@ -19,6 +19,8 @@ import { Fragment } from "react/jsx-runtime";
 const navigationLinks = [
   { href: "/", label: "Home", role: "PUBLIC" },
   { href: "/about", label: "About", role: "PUBLIC" },
+  { href: "/projects", label: "Projects", role: "PUBLIC" },
+  { href: "/blog", label: "Blog", role: "PUBLIC" },
   { href: "/features", label: "Features", role: "PUBLIC" },
   { href: "/contact", label: "Contact", role: "PUBLIC" },
   { href: "/faq", label: "FAQ", role: "PUBLIC" },
@@ -115,9 +117,11 @@ export default function Navbar() {
         {/* Right side */}
         <div className="flex items-center gap-2">
           <ModeToggle />
-          <Button size="sm" className="text-sm">
-            Hire me!
-          </Button>
+          <Link to="/hire-me">
+            <Button size="sm" className="text-sm">
+              Hire me!
+            </Button>
+          </Link>
         </div>
       </div>
     </header>

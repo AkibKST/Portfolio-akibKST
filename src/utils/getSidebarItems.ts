@@ -12,7 +12,9 @@ export const getSidebarItems = (userRole: TRole) => {
     case role.admin:
       return [...adminSidebarItems];
 
+    //default is always return empty array if no role matches
+    //but just for development purpose we can return adminSidebarItems
     default:
-      return [];
+      return [...adminSidebarItems];
   }
 };

@@ -7,6 +7,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Switch } from "@/components/ui/switch";
+import { Helmet } from "react-helmet-async";
 import {
   useGetAllUsersQuery,
   useUpdateUserStatusMutation,
@@ -31,53 +32,75 @@ export default function UserManagement() {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <>
+        <Helmet>
+          <title>User Management - Akib KST Portfolio Admin</title>
+          <meta
+            name="description"
+            content="Manage user accounts and permissions."
+          />
+          <meta name="og:title" content="User Management" />
+        </Helmet>
+        <div>Loading...</div>
+      </>
+    );
   }
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-3xl font-bold">User Management</h1>
-      <div className="rounded-md border">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Name</TableHead>
-              <TableHead>Email</TableHead>
-              <TableHead>Role</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Block User</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {users?.map((user) => (
-              <TableRow key={user._id}>
-                <TableCell className="font-medium">{user.name}</TableCell>
-                <TableCell>{user.email}</TableCell>
-                <TableCell>{user.role}</TableCell>
-                <TableCell>
-                  <span
-                    className={`px-2 py-1 rounded-full text-xs ${
-                      user.isActive === "BLOCKED"
-                        ? "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200"
-                        : "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
-                    }`}
-                  >
-                    {user.isActive === "BLOCKED" ? "Blocked" : "Active"}
-                  </span>
-                </TableCell>
-                <TableCell>
-                  <Switch
-                    checked={user.isActive === "BLOCKED"}
-                    onCheckedChange={(checked) =>
-                      handleStatusChange(user, checked)
-                    }
-                  />
-                </TableCell>
+    <>
+      <Helmet>
+        <title>User Management - Akib KST Portfolio Admin</title>
+        <meta
+          name="description"
+          content="Manage user accounts and permissions."
+        />
+        <meta name="og:title" content="User Management" />
+      </Helmet>
+      <div className="space-y-6">
+        <h1 className="text-3xl font-bold">User Management</h1>
+        <div className="rounded-md border">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Name</TableHead>
+                <TableHead>Email</TableHead>
+                <TableHead>Role</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead>Block User</TableHead>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHeader>
+            <TableBody>
+              {users?.map((user) => (
+                <TableRow key={user._id}>
+                  <TableCell className="font-medium">{user.name}</TableCell>
+                  <TableCell>{user.email}</TableCell>
+                  <TableCell>{user.role}</TableCell>
+                  <TableCell>
+                    <span
+                      className={`px-2 py-1 rounded-full text-xs ${
+                        user.isActive === "BLOCKED"
+                          ? "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200"
+                          : "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+                      }`}
+                    >
+                      {user.isActive === "BLOCKED" ? "Blocked" : "Active"}
+                    </span>
+                  </TableCell>
+                  <TableCell>
+                    <Switch
+                      checked={user.isActive === "BLOCKED"}
+                      onCheckedChange={(checked) =>
+                        handleStatusChange(user, checked)
+                      }
+                    />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

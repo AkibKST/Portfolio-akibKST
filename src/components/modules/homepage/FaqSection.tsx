@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/accordion";
 import { FAQScene } from "@/components/3D/FAQScene";
 import { Canvas3D } from "@/components/3D/Canvas3D";
+import { HelpCircle } from "lucide-react";
 
 interface FaqItem {
   id: string;
@@ -20,7 +21,6 @@ interface Faq1Props {
 }
 
 const FaqSection = ({
-  //   heading = "Frequently asked questions", used raw heading in h1
   items = [
     {
       id: "faq-1",
@@ -67,21 +67,43 @@ const FaqSection = ({
   ],
 }: Faq1Props) => {
   return (
-    <section className="py-24">
+    <section className="py-24 relative">
       <div className="container mx-auto px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-          {/* Left side - Heading and Accordion */}
+          {/* Left side - Accordion */}
           <div className="flex flex-col">
-            <h1 className="mb-3 mt-2 text-balance text-3xl font-semibold md:text-4xl">
-              FAQ <span className="text-primary"> Section</span>
-            </h1>
-            <Accordion type="single" collapsible>
+            <div className="mb-8">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 mb-6">
+                <HelpCircle className="w-4 h-4 text-cyan-400" />
+                <span className="text-sm font-medium text-cyan-400">
+                  Quick Answers
+                </span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+                Answers You Need
+              </h2>
+              <p className="text-muted-foreground">
+                Find quick answers to common questions about services, process,
+                and collaboration.
+              </p>
+            </div>
+
+            <Accordion type="single" collapsible className="w-full">
               {items.map((item, index) => (
-                <AccordionItem key={index} value={`item-${index}`}>
-                  <AccordionTrigger className="font-semibold hover:no-underline">
-                    {item.question}
+                <AccordionItem
+                  key={index}
+                  value={`item-${index}`}
+                  className="border-b border-border/50 last:border-0"
+                >
+                  <AccordionTrigger className="font-semibold hover:no-underline py-4 hover:text-cyan-400 transition-colors">
+                    <span className="text-left">
+                      <span className="text-cyan-400 mr-3 font-bold">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      {item.question}
+                    </span>
                   </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
+                  <AccordionContent className="text-muted-foreground pb-4">
                     {item.answer}
                   </AccordionContent>
                 </AccordionItem>
@@ -90,18 +112,22 @@ const FaqSection = ({
           </div>
 
           {/* Right side - 3D Animation */}
-          <div className="hidden lg:flex justify-center items-center">
-            <Canvas3D height="h-96">
-              <Suspense
-                fallback={
-                  <div className="w-full h-full flex items-center justify-center bg-black/20 backdrop-blur-sm">
-                    <div className="animate-spin">Loading...</div>
-                  </div>
-                }
-              >
-                <FAQScene />
-              </Suspense>
-            </Canvas3D>
+          <div className="hidden lg:flex justify-center items-center sticky top-20">
+            <div className="relative w-full h-96 rounded-2xl border border-cyan-500/20 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 backdrop-blur-sm overflow-hidden">
+              <Canvas3D height="h-96">
+                <Suspense
+                  fallback={
+                    <div className="w-full h-full flex items-center justify-center bg-black/20 backdrop-blur-sm">
+                      <div className="animate-pulse text-sm text-muted-foreground">
+                        Loading 3D Animation...
+                      </div>
+                    </div>
+                  }
+                >
+                  <FAQScene />
+                </Suspense>
+              </Canvas3D>
+            </div>{" "}
           </div>
         </div>
       </div>

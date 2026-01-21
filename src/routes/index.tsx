@@ -14,6 +14,10 @@ import Contact from "@/pages/Contact";
 import Faq from "@/pages/Faq";
 import { AboutPage } from "@/pages/About";
 import AdminDashboard from "@/pages/Admin/Dashboard";
+import ProjectsPage from "@/pages/Projects";
+import BlogPage from "@/pages/Blog";
+import ServicesPage from "@/pages/Services";
+import HireMe from "@/pages/HireMe";
 
 export const router = createBrowserRouter([
   {
@@ -29,12 +33,28 @@ export const router = createBrowserRouter([
         path: "about",
       },
       {
+        Component: ProjectsPage,
+        path: "projects",
+      },
+      {
+        Component: BlogPage,
+        path: "blog",
+      },
+      {
         Component: Profile,
         path: "profile",
       },
       {
         Component: Features,
         path: "features",
+      },
+      {
+        Component: ServicesPage,
+        path: "services",
+      },
+      {
+        Component: HireMe,
+        path: "hire-me",
       },
       {
         Component: Contact,
