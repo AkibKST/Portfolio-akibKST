@@ -12,13 +12,10 @@ const HeroSection = () => {
   const navigate = useNavigate();
 
   const handleDownloadCV = () => {
-    // Create a link to download CV - update with your actual CV path
-    const link = document.createElement("a");
-    link.href = "/cv.pdf"; // Update with your actual CV path
-    link.download = "resume.pdf";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    // Download CV from Google Drive
+    const cvUrl =
+      "https://drive.google.com/uc?export=download&id=1OKtdXeX_uDFq-099kTpfUQsRVHb9iezr";
+    window.open(cvUrl, "_blank");
   };
 
   return (
@@ -65,7 +62,7 @@ const HeroSection = () => {
                   </span>
                 </h1>
                 <p className="text-lg sm:text-xl md:text-2xl font-medium text-foreground/80">
-                  Full Stack Developer & UI/UX Designer
+                  Full Stack Developer
                 </p>
               </div>
 
